@@ -10,15 +10,20 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean package'
             }
         }
         
         stage('Test') {
             steps {
-                sh 'java -jar target/selenium-tests.jar'
-                sh 'mvn test'
+                sh 'start java -jar target/myapp.jar'
+                sh 'start mvn test'
                 
+            }
+        }
+        stage('Cleanup') {
+            steps {
+                sh 'taskkill /im chromedriver.exe /f'
             }
         }
     }
