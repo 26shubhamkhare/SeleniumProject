@@ -24,17 +24,11 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            junit 'target/surefire-reports/*.xml'
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'target/site/surefire-report',
-                reportFiles: 'index.html',
-                reportName: 'Test Results'
-            ])
-        }
-    }
+   post {
+  always {
+    publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, 
+      includes: '**/target/surefire-reports/*.html', reportDir: 'target/surefire-reports', 
+      reportFiles: 'index.html', reportName: 'Test Results'])
+  }
+}
 }
