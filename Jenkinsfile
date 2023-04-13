@@ -16,7 +16,7 @@ pipeline {
         
         stage('Test') {
             steps {
-                sh 'start java -jar target/myapp.jar'
+                bat 'start cmd /c "mvn clean test"'
                 sh 'start mvn test'
                 
             }
