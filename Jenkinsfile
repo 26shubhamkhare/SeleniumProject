@@ -10,6 +10,12 @@ pipeline {
         
         stage('Build') {
             steps {
+                if (isUnix()) {
+                sh 'nohup java -jar selenium-server-standalone.jar &'
+            } else {
+                bat 'start /B java -jar selenium-server-standalone.jar'
+            }
+
                 sh 'mvn clean install'
             }
         }
