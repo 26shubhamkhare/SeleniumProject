@@ -17,13 +17,13 @@ pipeline {
         stage('Test') {
             steps {
                 bat 'start cmd /c "mvn clean test"'
-                sh 'start mvn test'
+                bat 'start mvn test'
                 
             }
         }
         stage('Cleanup') {
             steps {
-                sh 'taskkill /im chromedriver.exe /f'
+                bat 'taskkill /im chromedriver.exe /f'
             }
         }
     }
