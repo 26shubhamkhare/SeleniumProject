@@ -22,13 +22,21 @@ pipeline {
                 bat 'mvn surefire-report:report'
             }
         }
+         stage('Publish HTML Reports') {
+  steps {
+    script {
+      publishHTML([
+        allowMissing: false, 
+        alwaysLinkToLastBuild: true, 
+        keepAll: true, // add the keepAll parameter
+        reportDir: 'target/site',
+        reportFiles: 'index.html',
+        reportName: 'HTML Report'
+      ])
     }
-
-   post {
-  always {
-    publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, 
-      includes: '**/target/surefire-reports/*.html', reportDir: 'target/surefire-reports', 
-      reportFiles: 'index.html', reportName: 'Test Results'])
   }
 }
-}
+    
+
+  
+
