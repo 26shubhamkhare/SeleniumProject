@@ -1,14 +1,24 @@
 pipeline {
     agent any
+    
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                sh 'mvn clean package'
+                git 'https://github.com/your-repo/your-selenium-project.git'
             }
         }
+        
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        
         stage('Test') {
             steps {
                 sh 'java -jar target/selenium-tests.jar'
+                sh 'mvn test'
+                
             }
         }
     }
